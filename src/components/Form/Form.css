@@ -1,0 +1,10 @@
+.form{
+    min-width: 256px;
+    height: 70vh;
+    background-color: rgba(178, 178, 200, 0.1);
+    border-radius: 5%;
+}
+
+.form-title{
+    color: #fff;
+}

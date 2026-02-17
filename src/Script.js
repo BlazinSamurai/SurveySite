@@ -8,16 +8,18 @@ export const initExperience = (canvasElement) => {
     /**
      * Debud
      */
-    const gui = new GUI()
+    // const gui = new GUI()
 
     const parameters = { materialColor: '#ffeded'}
 
-    gui
-    .addColor(parameters, 'materialColor')
-    .onChange(() => {
-        material.color.set(parameters.materialColor)
-        particlesMaterial.color.set(parameters.materialColor)
-    })
+    // gui
+    // .addColor(parameters, 'materialColor')
+    // .onChange((change) => {
+    //     material.color.set(parameters.materialColor)
+    //     particlesMaterial.color.set(parameters.materialColor)
+    //     // console.log(change)
+    //     parameters.materialColor = change
+    // })
 
     /**
     * Base
@@ -33,7 +35,7 @@ export const initExperience = (canvasElement) => {
     */
     // Texture
     const textureLoader = new THREE.TextureLoader()
-    const gradientTexture = textureLoader.load('/textures/gradients/3.jpg')
+    const gradientTexture = textureLoader.load('../static/textures/gradients/3.jpg')
     gradientTexture.magFilter = THREE.NearestFilter
 
     // Material
@@ -46,25 +48,25 @@ export const initExperience = (canvasElement) => {
     // Meshes
     const objectsDistance = 4;
     const mesh1 = new THREE.Mesh(
-        new THREE.TorusGeometry(1, 0.4, 16, 60),
+        new THREE.TorusGeometry(0.5, 0.4, 16, 60),
         material
     )
     const mesh2 = new THREE.Mesh(
-        new THREE.ConeGeometry(1, 2, 32),
+        new THREE.ConeGeometry(0.5, 2, 32),
         material
     )
     const mesh3 = new THREE.Mesh(
-        new THREE.TorusKnotGeometry(0.8, 0.35, 100, 16),
+        new THREE.TorusKnotGeometry(0.4, 0.35, 100, 16),
         material
     )
 
     mesh1.position.y = - objectsDistance * 0
-    mesh2.position.y = - objectsDistance * 1
-    mesh3.position.y = - objectsDistance * 2
+    mesh2.position.y = - objectsDistance * 0
+    mesh3.position.y = - objectsDistance * 0
 
     mesh1.position.x = 2
-    mesh2.position.x = - 2
-    mesh3.position.x = 2
+    mesh2.position.x = 0
+    mesh3.position.x = -2
 
     scene.add(mesh1, mesh2, mesh3);
 
@@ -74,7 +76,7 @@ export const initExperience = (canvasElement) => {
     * Particles
     */
     // Geometry
-    const particlesCount = 200
+    const particlesCount = 2000
     const positions = new Float32Array(particlesCount * 3)
 
     for(let i = 0; i < particlesCount; i++ ){
@@ -231,13 +233,13 @@ export const initExperience = (canvasElement) => {
 
     tick()
 
-    return () => {
-        gui.destroy()
+    // return () => {
+        // gui.destroy()
         // window.removeEventListener('resize', resizeHandler)
         // window.removeEventListener('scroll', scrollHandler)
         // window.removeEventListener('mousemove', mouseHandler)
         // window.removeEventListener('resize')
         // window.removeEventListener('scroll')
         // window.removeEventListener('mousemove')
-    }
+    // }
 }

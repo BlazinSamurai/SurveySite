@@ -1,25 +1,34 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { initExperience } from '../../Script.js'
 import './App.css'
-import { div } from 'three/tsl';
+
+import Form from '../Form/Form.jsx'
+import Footer from '../Footer/Footer.jsx'
 
 function App() {
 
-  const canvasRef = useRef(null);
+  const canvasRef = useRef(null)
 
   useEffect(() => {
-    // This runs once when the component enters the page
-    const cleanup = initExperience(canvasRef.current)
 
-    return () => {
-      // This runs when the component leaves the page
-      cleanup()
-    }
+    initExperience(canvasRef.current)
+
+    // no gui no need for cleanup
+    // This runs once when the component enters the page
+    // const cleanup = initExperience(canvasRef.current)
+
+    // return () => {
+    //   // This runs when the component leaves the page
+    //   cleanup()
+    // }
+
   }, []);
 
   return (
-    <div>
-      <h1>Hello THREE.js</h1>
+    <div className='page'>
+      <h1 className='page-title'>Employees Survey!</h1>
+      <Form></Form>
+      <Footer></Footer>
       <canvas ref={canvasRef} className='webgl'/>
     </div>
   )

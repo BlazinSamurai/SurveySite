@@ -1,0 +1,42 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  bottom: 10px;
+  width: 90%;
+}
+
+.footer__divider {
+  border-bottom: 1px solid #fff;
+  flex-grow: 1;
+}
+
+.footer__info {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+}
+
+.footer__copyright,
+.footer__text {
+  color: #fff;
+  font-size: 10px;
+}
+
+@media screen and (max-width: 425px) {
+  .footer{
+    width: 85%;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .footer{
+    width: 82%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .footer{
+    width: 79%;
+  }
+}
