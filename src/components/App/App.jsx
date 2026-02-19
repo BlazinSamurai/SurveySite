@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { initExperience } from '../../Script.js'
-import './App.css'
+import React, { useEffect, useRef, useState } from "react";
+import { initExperience } from "../../Script.js";
+import "./App.css";
 
-import  { getSurveys } from "../../utils/api.js"
+import { getSurveys } from "../../utils/api.js";
 
-import Form from '../Form/Form.jsx'
-import Footer from '../Footer/Footer.jsx'
+import Form from "../Form/Form.jsx";
+import Footer from "../Footer/Footer.jsx";
 
 function App() {
   const canvasRef = useRef(null);
@@ -23,16 +23,13 @@ function App() {
     // }
   }, []);
 
-  useEffect(() => {
-    getSurveys()
-      .then(
-        console.log("Connected to Backend!")
-      )
-      .catch((e) => {
-        console.error(e.message);
-      });
-
-  }, []);
+  // useEffect(() => {
+  //   getSurveys()
+  //     .then(console.log("Connected to Backend!"))
+  //     .catch((e) => {
+  //       console.error(e.message);
+  //     });
+  // }, []);
 
   return (
     <div className="page">
@@ -44,4 +41,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

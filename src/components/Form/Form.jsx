@@ -1,8 +1,39 @@
 import "./Form.css";
 
+import { useEffect, useState } from "react";
+
 function Form() {
+  const [isValid, setIsValid] = useState(false);
+
+  // Update validation whenever the form is clicked
+  const handleFormChange = (e) => {
+    const formData = new FormData(e.currentTarget);
+    const q1 = formData.get("q1");
+    const q2 = formData.get("q2");
+
+    // Valid if both radio groups have a selection
+    setIsValid(!!q1 && !!q2);
+  };
+
+  const handleSurveySubmit = (e) => {
+    e.preventDefault();
+
+    // Read all values at once
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      Q1: formData.get("q1"),
+      Q2: formData.get("q2"),
+      Q3: formData.get("q3"),
+    };
+
+    console.log("Survey Submitted:", data);
+  };
   return (
-    <form className="form">
+    <form
+      className="form"
+      onSubmit={handleSurveySubmit}
+      onChange={handleFormChange}
+    >
       <h4 className="form__title">Form Title</h4>
       <fieldset className="form__container">
         {/* Question 1 */}
@@ -11,22 +42,26 @@ function Form() {
             1. Please select which one is more valuable to have when looking for
             a potential candiate:
           </legend>
-          <label htmlFor="A">
+          <label htmlFor="q1A">
             <input
               type="radio"
-              id="A"
-              name="questionOne"
+              id="q1A"
+              name="q1"
               value="A candiate with the required skills and experience."
-              required
+              // onChange={handleInputChange}
+              // readOnly={console.log("readOnly activated!")}
+              // onClick={console.log("onClick activated!")}
+              // required
             />{" "}
             A candiate with the required skills and experience.
           </label>
-          <label htmlFor="B">
+          <label htmlFor="q1B">
             <input
               type="radio"
-              id="B"
-              name="questionOne"
+              id="q1B"
+              name="q1"
               value="A candiate with the ability to adapt to new tech stacks."
+              // required
             />{" "}
             A candiate with the ability to adapt to new tech stacks.
           </label>
@@ -37,22 +72,23 @@ function Form() {
             2. Please select which one is more valuable to have when looking for
             a potential candiate:
           </legend>
-          <label htmlFor="A">
+          <label htmlFor="q2A">
             <input
               type="radio"
-              id="A"
-              name="questionTwo"
+              id="q2A"
+              name="q2"
               value="A candiate with the required skills and experience."
-              required
+              // required
             />{" "}
             A candiate with the required skills and experience.
           </label>
-          <label htmlFor="B">
+          <label htmlFor="q2B">
             <input
               type="radio"
-              id="B"
-              name="questionTwo"
+              id="q2B"
+              name="q2"
               value="A candiate with the ability to adapt to new tech stacks."
+              // required
             />{" "}
             A candiate with the ability to adapt to new tech stacks.
           </label>
@@ -63,20 +99,13 @@ function Form() {
             3. If you have any other advice, or tips, to help navigate or land a
             career in the tech field be describe here(optional):
           </legend>
-          <label htmlFor="other" className="form__question-text-label">
-            {/* <input
-              type="text"
-              id="other"
-              name="questionThree"
+          <label htmlFor="q3txt" className="form__question-text-label">
+            <textarea
+              id="q3txt"
+              name="q3"
               className="form__question-text-input"
               minLength="3"
               maxLength="500"
-              placeholder="It really help when a candiate has the following . . . "
-            /> */}
-            <textarea
-              id="other"
-              name="questionThree"
-              className="form__question-text-input"
               placeholder="The best way for candiate to standout is . . ."
             ></textarea>
           </label>
@@ -84,7 +113,14 @@ function Form() {
       </fieldset>
       {/* submit button */}
       <div>
-        <button type="submit" className="form__button-submit">Submit</button>
+        <button
+          type="submit"
+          className="form__button-submit"
+          disabled={!isValid}
+        >
+          {" "}
+          Submit
+        </button>
       </div>
     </form>
   );
