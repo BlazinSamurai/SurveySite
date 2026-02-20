@@ -2,13 +2,20 @@ import React, { useEffect, useRef, useState } from "react";
 import { initExperience } from "../../Script.js";
 import "./App.css";
 
-import { getSurveys } from "../../utils/api.js";
+import { getSurvey, postSurvey } from "../../utils/api.js";
 
 import Form from "../Form/Form.jsx";
 import Footer from "../Footer/Footer.jsx";
 
 function App() {
   const canvasRef = useRef(null);
+
+  const handleSurveySubmit = (data) => {
+    console.log(data);
+    postSurvey(data).then((result) => {
+      console.log("Survey submitted! " + result);
+    });
+  };
 
   useEffect(() => {
     initExperience(canvasRef.current);
@@ -34,7 +41,7 @@ function App() {
   return (
     <div className="page">
       <h1 className="page-title">Employees Survey!</h1>
-      <Form></Form>
+      <Form surveyHandler={handleSurveySubmit}></Form>
       <Footer></Footer>
       <canvas ref={canvasRef} className="webgl" />
     </div>

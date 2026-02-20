@@ -2,7 +2,7 @@ import "./Form.css";
 
 import { useEffect, useState } from "react";
 
-function Form() {
+function Form({ surveyHandler }) {
   const [isValid, setIsValid] = useState(false);
 
   // Update validation whenever the form is clicked
@@ -26,7 +26,7 @@ function Form() {
       Q3: formData.get("q3"),
     };
 
-    console.log("Survey Submitted:", data);
+    surveyHandler(data);
   };
   return (
     <form
@@ -38,32 +38,29 @@ function Form() {
       <fieldset className="form__container">
         {/* Question 1 */}
         <div className="form__question">
-          <legend>
-            1. Please select which one is more valuable to have when looking for
-            a potential candiate:
-          </legend>
+          <legend>1. When is the best site to apply to job at:</legend>
           <label htmlFor="q1A">
             <input
               type="radio"
               id="q1A"
               name="q1"
-              value="A candiate with the required skills and experience."
+              value="LinkedIn"
               // onChange={handleInputChange}
               // readOnly={console.log("readOnly activated!")}
               // onClick={console.log("onClick activated!")}
               // required
             />{" "}
-            A candiate with the required skills and experience.
+            LinkedIn.
           </label>
           <label htmlFor="q1B">
             <input
               type="radio"
               id="q1B"
               name="q1"
-              value="A candiate with the ability to adapt to new tech stacks."
+              value="Indeed"
               // required
             />{" "}
-            A candiate with the ability to adapt to new tech stacks.
+            Indeed.
           </label>
         </div>
         {/* Question 2 */}
@@ -77,20 +74,22 @@ function Form() {
               type="radio"
               id="q2A"
               name="q2"
-              value="A candiate with the required skills and experience."
+              value="A candiate with the required experience but not the necessary skills."
               // required
             />{" "}
-            A candiate with the required skills and experience.
+            A candiate with the required experience but not the necessary
+            skills.
           </label>
           <label htmlFor="q2B">
             <input
               type="radio"
               id="q2B"
               name="q2"
-              value="A candiate with the ability to adapt to new tech stacks."
+              value="A candiate with the required skills but not the necessary experience."
               // required
             />{" "}
-            A candiate with the ability to adapt to new tech stacks.
+            A candiate with the required skills but not the necessary
+            experience.
           </label>
         </div>
         {/* Text Input */}
@@ -117,6 +116,10 @@ function Form() {
           type="submit"
           className="form__button-submit"
           disabled={!isValid}
+          /**
+           * eventually form with close once form has been submitted
+           * onClick={"close form"}
+           */
         >
           {" "}
           Submit

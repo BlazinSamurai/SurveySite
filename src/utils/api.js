@@ -17,8 +17,23 @@ function request(url, options) {
   return fetch(url, options).then(checkResponse);
 }
 
-export const getSurveys  = () => {
+function getSurvey() {
   return request(`${baseUrl}/surveys`);
 }
 
-// export default getSurveys
+function postSurvey(data) {
+  return request(`${baseUrl}/surveys`, {
+    method: "POST",
+    header: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      q1: data.Q1,
+      q2: data.Q2,
+      q3: data.Q3,
+    }),
+  });
+}
+
+export { getSurvey, postSurvey };
