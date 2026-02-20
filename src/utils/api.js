@@ -1,4 +1,4 @@
-const baseUrl = process.env.NODE_ENV === "http://localhost:5173";
+const baseUrl = "http://localhost:5174";
 
 // const baseUrl =
 //   process.env.NODE_ENV === "production"
@@ -18,13 +18,13 @@ function request(url, options) {
 }
 
 function getSurvey() {
-  return request(`${baseUrl}/surveys`);
+  return request(`${baseUrl}/surveys/get`);
 }
 
 function postSurvey(data) {
   return request(`${baseUrl}/surveys`, {
     method: "POST",
-    header: {
+    headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
